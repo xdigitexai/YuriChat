@@ -157,8 +157,8 @@
       <span class="brand-text"><span class="brand-name">Yuro<span class="gold">Chat</span></span><span class="brand-tag">Chat • Connect • Earn</span></span>
     </a>
     <div class="topbar-stats" aria-label="Illustrative platform figures">
-      <span class="tb-stat" title="Illustrative demo figure — ><span class="tb-dot"></span><b>2,531</b> online now</span>
-      <span class="tb-stat" title="Illustrative demo figure — ><span aria-hidden="true">👥</span><b>12,480</b> members</span>
+      <span class="tb-stat"tb-dot"></span><b>2,531</b> online now</span>
+      <span class="tb-stat"true">👥</span><b>12,480</b> members</span>
     </div>
     <div class="topbar-actions">
       <a class="btn-join" href="https://Mulaearn.com/register.php?ref=Enachat" target="_blank" rel="noopener">Join Now <span aria-hidden="true">→</span></a>
@@ -179,7 +179,6 @@
   <div class="wrap statstrip-inner">
     <span class="ss-item">⟡ <b>2,531</b> chatting now</span>
     <span class="ss-item">👤 <b>12,480</b> members</span>
-    <span class="demo-chip">demo figures</span>
   </div>
 </div>
 <main id="top-main">
@@ -303,12 +302,12 @@
 <div class="demo-toasts" aria-live="polite">
  <div class="demo-toast toast-left" id="toastLeft">
   <span class="toast-ico ok" aria-hidden="true">✓</span>
-  <div class="toast-body"><p class="toast-title"></p><p class="toast-meta"><span class="toast-time">Just now</span><span class="toast-demo">demo</span></p></div>
+  <div class="toast-body"><p class="toast-title"></p><p class="toast-meta"><span class="toast-time">Just now</span></p></div>
   <button class="toast-close" type="button" aria-label="Dismiss notification">×</button>
  </div>
  <div class="demo-toast toast-right" id="toastRight">
   <span class="toast-ico people" aria-hidden="true">👥</span>
-  <div class="toast-body"><p class="toast-title"></p><p class="toast-meta"><span class="toast-time">Just now</span><span class="toast-demo">demo</span></p></div>
+  <div class="toast-body"><p class="toast-title"></p><p class="toast-meta"><span class="toast-time">Just now</span></p></div>
   <button class="toast-close" type="button" aria-label="Dismiss notification">×</button>
  </div>
 </div>
@@ -393,7 +392,6 @@ function animateConversation(){
  },1300+Math.random()*900);
 }
 setTimeout(animateConversation,700);
-// Count-up metrics settle at demo values. Replace targets with API-backed values before production.
 function countUp(el){const target=Number(el.dataset.count||0),duration=1900,start=performance.now();const prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'';el.classList.add('counting');function frame(now){const t=Math.min(1,(now-start)/duration),ease=1-Math.pow(1-t,4),value=target*ease;let formatted;if(el.dataset.decimals)formatted=value.toFixed(Number(el.dataset.decimals));else if(el.dataset.commas)formatted=Math.round(value).toLocaleString('en-US');else if(el.dataset.compact&&value>=1000)formatted='$'+(value/1000).toFixed(value>=100000?0:1)+'K';else formatted=Math.round(value).toLocaleString('en-US');if(el.dataset.compact){el.textContent=formatted;}else el.textContent=prefix+formatted+suffix;if(t<1)requestAnimationFrame(frame);else el.classList.remove('counting')}requestAnimationFrame(frame)}
 const statsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.querySelectorAll('[data-count]').forEach(countUp);statsObserver.unobserve(entry.target)}}),{threshold:.3});const statsElement=document.querySelector('.stats');if(statsElement)statsObserver.observe(statsElement);
 // Smooth entrance animations, with a no-JS-friendly visible fallback in CSS for reduced motion.
