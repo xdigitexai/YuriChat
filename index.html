@@ -48,19 +48,140 @@
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:18px}.hero-art{min-height:0;gap:12px;margin-top:12px}.chat-card{width:min(390px,100%)}.pay-card,.earn-card{position:relative;left:auto;right:auto;top:auto;bottom:auto;min-width:0;width:min(340px,100%);transform:none;animation:none}.sparkle{display:none}.orb{width:330px;height:330px;right:8%;top:6%}}
 @media(max-width:760px){.member{padding:14px}.member .member-person{gap:8px}.member .member-person .member-avatar,.member .member-person .member-avatar img{width:44px;height:44px;border-radius:14px}.member h3{font-size:13px}.member .member-head>.pulse{display:none}.member .meta{font-size:10px}.member .btn{padding:9px 10px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+/* ---------- purple top bar ---------- */
+.topbar{position:sticky;top:0;z-index:60;background:linear-gradient(118deg,#2a0a3d 0%,#46106a 46%,#67188f 100%);color:#fff;box-shadow:0 10px 34px #2a0a3d40}
+.topbar:before{content:"";position:absolute;inset:0;background:radial-gradient(600px 200px at 88% -40%,#a34dff38,transparent 70%);pointer-events:none}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:15px 0 13px;position:relative;z-index:1}
+.brand-block{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-logo{width:46px;height:46px;flex-shrink:0;filter:drop-shadow(0 4px 10px #18042566)}
+.brand-name{display:block;font:800 21px/1.1 Manrope,sans-serif;letter-spacing:-.045em;color:#fff}
+.brand-name .gold{color:#f6c755}
+.brand-tag{display:block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#d9c4ec;margin-top:4px}
+.topbar-stats{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+.tb-stat{display:inline-flex;align-items:center;gap:8px;background:#ffffff14;border:1px solid #ffffff2b;border-radius:999px;padding:9px 15px;font-size:12px;font-weight:700;color:#efe6f7;white-space:nowrap}
+.tb-stat b{color:#fff;font-weight:800}
+.tb-dot{width:8px;height:8px;border-radius:50%;background:#5fe08d;box-shadow:0 0 0 4px #5fe08d2e;animation:pulse 1.8s infinite}
+.topbar-actions{display:flex;align-items:center;gap:10px}
+.btn-join{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(180deg,#ffe08a,#f0b93f);color:#3d1f02;border:1px solid #ffe9a8;border-radius:999px;padding:13px 22px;font-weight:800;font-size:13px;white-space:nowrap;box-shadow:0 10px 22px #18042547;transition:transform .2s,box-shadow .2s}
+.btn-join:hover{transform:translateY(-2px);box-shadow:0 14px 28px #1804255c}
+.topbar .mobile-toggle{display:none;border:1px solid #ffffff38;background:#ffffff12;color:#fff;border-radius:50%;width:42px;height:42px;font-size:20px}
+.topnav{position:relative;z-index:1;border-top:1px solid #ffffff1f;background:#1d0729a8}
+.topnav-inner{display:flex;align-items:center;gap:26px;padding:11px 0}
+.topnav-inner a{color:#e4d5f2;font-size:12.5px;font-weight:700;transition:color .2s}
+.topnav-inner a:hover{color:#f6c755}
+.topnav-inner .nav-join{display:none}
+.topbar-note{margin:0;padding:0 0 9px;text-align:center;font-size:9.5px;letter-spacing:.04em;color:#c9b4dd;position:relative;z-index:1}
+/* pale green stat strip */
+.statstrip{background:#e9f8d9;border-bottom:1px solid #d6ecc2}
+.statstrip-inner{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap;padding:13px 0;color:#3c6b22;font-size:13px;font-weight:700}
+.statstrip-inner b{color:#2f5a19;font-weight:800}
+.statstrip .ss-item{display:inline-flex;align-items:center;gap:7px}
+.demo-chip{display:inline-flex;align-items:center;font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#6d8a56;background:#ffffff8f;border:1px solid #cfe4b8;border-radius:999px;padding:3px 8px}
+/* ---------- payouts / stories ---------- */
+.stories{background:#fbfbf8;padding:88px 0 96px}
+.stories-head{max-width:760px;margin:0 auto 40px;text-align:center}
+.stories-head h2{font:800 clamp(2rem,4.2vw,3.4rem)/1.06 Manrope,sans-serif;letter-spacing:-.055em;margin:0 0 14px;color:#12161c}
+.stories-head h2 em{font-style:normal;color:#6a2b96}
+.stories-sub{color:#6b7480;font-size:15px;margin:0}
+.stories-note{margin:10px 0 0;font-size:11px;color:#8d95a0}
+.tcards{display:grid;gap:16px}
+.tcard{display:grid;grid-template-columns:112px 1fr auto;gap:26px;align-items:center;background:#fff;border:1px solid #eeece7;border-radius:26px;padding:24px 28px;box-shadow:0 18px 44px #22301c0f;transition:transform .25s,box-shadow .25s}
+.tcard:hover{transform:translateY(-3px);box-shadow:0 24px 54px #22301c1a}
+.tcard-avatar{width:112px;height:112px;border-radius:50%;overflow:hidden;background:#f1ece2;flex-shrink:0}
+.tcard-avatar img{width:112px;height:112px;object-fit:cover;display:block;border-radius:50%}
+.tcard-name{font:800 22px/1.2 Manrope,sans-serif;letter-spacing:-.035em;margin:0 0 3px;color:#12161c}
+.tcard-country{font-size:12px;color:#7b8590;display:flex;align-items:center;gap:6px;margin-bottom:11px}
+.tcard-quote{margin:0 0 13px;color:#5d666f;font-size:13.5px;line-height:1.75;max-width:62ch}
+.tcard .stars{color:#e9a92a;letter-spacing:4px;font-size:15px}
+.tcard-side{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:9px;min-width:170px}
+.payout-pill{background:#dff5e6;color:#1f7a44;border-radius:999px;padding:10px 16px;font-weight:800;font-size:14px;white-space:nowrap}
+.story-method{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#5f6a74;font-weight:700}
+.story-method i{font-style:normal;font-size:14px}
+.tcard-time{font-size:11px;color:#9aa3ac}
+.btn-stories{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(118deg,#4a1069,#75219c);color:#fff;border-radius:999px;padding:15px 28px;font-weight:800;font-size:14px;box-shadow:0 14px 32px #4a10693d;transition:transform .2s,box-shadow .2s}
+.btn-stories:hover{transform:translateY(-2px);box-shadow:0 18px 38px #4a106952}
+.stories-cta{text-align:center;margin-top:30px}
+/* ---------- floating demo toasts ---------- */
+.demo-toasts{position:fixed;inset:auto 0 0 0;pointer-events:none;z-index:70}
+.demo-toast{position:fixed;display:flex;align-items:flex-start;gap:11px;width:300px;background:#fff;border:1px solid #ece9e2;border-radius:16px;padding:12px 13px;box-shadow:0 18px 42px #1b231a26;pointer-events:auto;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
+.demo-toast.show{opacity:1;transform:translateY(0)}
+.demo-toast.toast-left{left:22px;bottom:22px}
+.demo-toast.toast-right{right:22px;bottom:96px}
+.toast-ico{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:16px}
+.toast-ico.ok{background:#dff5e6;color:#1f7a44;font-weight:900}
+.toast-ico.people{background:#efe2fb;color:#6a2b96;font-weight:900}
+.toast-body{min-width:0}
+.toast-title{font-size:11.5px;line-height:1.5;color:#2a323a;font-weight:700;margin:0 0 3px}
+.toast-meta{font-size:10px;color:#98a1aa;margin:0;display:flex;gap:6px;align-items:center}
+.toast-demo{font-size:8.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#7e8a7a;background:#f0f3ec;border:1px solid #e2e7dc;border-radius:999px;padding:2px 6px}
+.toast-close{border:0;background:none;color:#b3bcc4;font-size:15px;line-height:1;padding:2px 4px;margin-left:auto;flex-shrink:0}
+.toast-close:hover{color:#5b6670}
+/* whatsapp fab */
+.chat-us .wa-icon{width:18px;height:18px;display:block;fill:#1b2914}
+@media(max-width:1024px){.tcard{grid-template-columns:96px 1fr;gap:20px}.tcard-avatar,.tcard-avatar img{width:96px;height:96px}.tcard-side{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap;min-width:0;text-align:left}}
+@media(max-width:760px){
+ .topbar-inner{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0 10px}
+ .brand-logo{width:40px;height:40px}.brand-name{font-size:18px}.brand-tag{font-size:9px}
+ .topbar-stats{grid-column:1/-1;justify-content:flex-start;gap:7px;order:3}
+ .tb-stat{padding:7px 11px;font-size:10.5px}
+ .topbar-actions{grid-column:2;justify-self:end}
+ .topbar .mobile-toggle{display:grid;place-items:center}
+ .btn-join{display:none}
+ .topnav-inner{display:none;position:absolute;left:0;right:0;background:#340c4a;border-top:1px solid #ffffff1f;flex-direction:column;align-items:stretch;gap:0;padding:8px 20px 16px;box-shadow:0 18px 30px #1804255c}
+ .topnav-inner.open{display:flex}
+ .topnav-inner a{padding:13px 0;border-bottom:1px solid #ffffff14;font-size:13px}
+ .topnav-inner .nav-join{display:inline-flex;justify-content:center;margin-top:12px;border:0;background:linear-gradient(180deg,#ffe08a,#f0b93f);color:#3d1f02;border-radius:999px;padding:12px 18px;font-weight:800}
+ .statstrip-inner{gap:12px;font-size:11.5px;padding:11px 0}
+ .stories{padding:62px 0 70px}
+ .tcard{grid-template-columns:1fr;gap:14px;padding:20px;border-radius:22px;text-align:left}
+ .tcard-avatar,.tcard-avatar img{width:76px;height:76px}
+ .tcard-name{font-size:19px}
+ .tcard-side{grid-column:auto;width:100%;justify-content:flex-start}
+ .demo-toast{width:calc(100% - 28px);left:14px;right:auto}
+ .demo-toast.toast-left{bottom:96px}
+ .demo-toast.toast-right{bottom:178px}
+}
 </style>
 </head>
 <body>
-<header class="nav-shell">
-  <nav class="nav wrap" aria-label="Main navigation">
-    <a class="brand" href="#top" aria-label="YuroChat home"><span class="brand-mark">e</span>YuroChat</a>
-    <div class="nav-links" id="navLinks">
-      <a href="#how">How it works</a><a href="#members">Members</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a>
+<header class="topbar" id="top">
+  <div class="wrap topbar-inner">
+    <a class="brand-block" href="#top" aria-label="YuroChat home">
+      <svg class="brand-logo" viewBox="0 0 48 48" role="img" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#f0b93f"/></linearGradient></defs>
+        <path d="M10 4h28a8 8 0 018 8v17a8 8 0 01-8 8H23l-9 8v-8h-4a8 8 0 01-8-8V12a8 8 0 018-8z" fill="url(#lg)"/>
+        <path d="M24 12l3.1 6.3 6.9 1-5 4.9 1.2 6.9-6.2-3.3-6.2 3.3 1.2-6.9-5-4.9 6.9-1z" fill="#4a1069"/>
+      </svg>
+      <span class="brand-text"><span class="brand-name">Yuro<span class="gold">Chat</span></span><span class="brand-tag">Chat • Connect • Earn</span></span>
+    </a>
+    <div class="topbar-stats" aria-label="Illustrative platform figures">
+      <span class="tb-stat" title="Illustrative demo figure — not a live count"><span class="tb-dot"></span><b>2,531</b> online now</span>
+      <span class="tb-stat" title="Illustrative demo figure — not a live count"><span aria-hidden="true">👥</span><b>12,480</b> members</span>
     </div>
-    <div class="nav-actions"><a class="btn btn-primary" href="#signup">Get started <span class="arrow">↗</span></a><button class="mobile-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button></div>
+    <div class="topbar-actions">
+      <a class="btn-join" href="https://Mulaearn.com/register.php?ref=Enachat" target="_blank" rel="noopener">Join Now <span aria-hidden="true">→</span></a>
+      <button class="mobile-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+    </div>
+  </div>
+  <nav class="topnav" aria-label="Main navigation">
+    <div class="wrap topnav-inner" id="navLinks">
+      <a href="#how">How it works</a><a href="#members">Members</a><a href="#reviews">Payout stories</a><a href="#faq">FAQ</a><a href="#signup">Sign up</a>
+      <a class="nav-join" href="https://Mulaearn.com/register.php?ref=Enachat" target="_blank" rel="noopener">Join Now →</a>
+    </div>
   </nav>
+    </div>
+  </nav>
+  <p class="topbar-note">Demo figures — illustrative only, not live counts</p>
 </header>
-<main id="top">
+<div class="statstrip">
+  <div class="wrap statstrip-inner">
+    <span class="ss-item">⟡ <b>2,531</b> chatting now</span>
+    <span class="ss-item">👤 <b>12,480</b> members</span>
+    <span class="demo-chip">demo figures</span>
+  </div>
+</div>
+<main id="top-main">
+
 <section class="hero">
  <div class="wrap hero-grid">
   <div class="hero-content">
@@ -124,18 +245,15 @@
   <div class="payout-list reveal delay-1"><div class="payout-header"><strong>Recent payout activity</strong><span><i class="pulse"></i> Example activity</span></div><div id="payoutRows"></div></div>
  </div>
 </section>
-<section class="section" id="reviews">
+<section class="stories" id="reviews">
  <div class="wrap">
-  <div class="section-head reveal"><div class="eyebrow">Kind words, shared experiences</div><h2>What members say.</h2><p>Stories from people who value flexible conversations and convenient payout options.</p><p class="demo-note" style="margin-top:10px">Demo testimonials — illustrative examples, not verified customer reviews.</p></div>
-  <div class="reviews-grid">
-   <article class="review reveal"><div class="stars">★★★★★</div><blockquote>“I chat for about two hours after my shift and it covers my rent contribution every month. The M-Pesa withdrawal is the part that sold me — I requested at 9pm and it was in my account before I slept.”</blockquote><div class="reviewer"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=85" alt="Kelvin profile photo" loading="lazy"></div><div><strong>Kelvin O. 🇰🇪</strong><small>Nairobi, Kenya</small></div><span class="verified">✓ Member since 2024</span></div></article>
-   <article class="review reveal delay-1"><div class="stars">★★★★★</div><blockquote>“I was sceptical because I had tried two other sites that just took my money at signup. Here I did not pay anything to join, and the first payout came through to my bank exactly when they said it would.”</blockquote><div class="reviewer"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=100&q=85" alt="Amaka profile photo" loading="lazy"></div><div><strong>Amaka N. 🇳🇬</strong><small>Lagos, Nigeria</small></div><span class="verified">✓ Top rated chatter</span></div></article>
-   <article class="review reveal delay-2"><div class="stars">★★★★★</div><blockquote>“The conversations are genuinely normal — people talk about their families, the weather, their dogs. I had a login issue once and support replied at 2am. MoMo withdrawal took a few minutes.”</blockquote><div class="reviewer"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=85" alt="Kwame profile photo" loading="lazy"></div><div><strong>Kwame B. 🇬🇭</strong><small>Accra, Ghana</small></div><span class="verified">✓ Member since 2025</span></div></article>
-   <article class="review reveal"><div class="stars">★★★★★</div><blockquote>“What I like is that there are no shifts. I am a student, so I chat between lectures and stop when I need to study. Nobody pressures you and you can block anyone who is rude.”</blockquote><div class="reviewer"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=85" alt="Naledi profile photo" loading="lazy"></div><div><strong>Naledi D. 🇿🇦</strong><small>Johannesburg, South Africa</small></div><span class="verified">✓ Verified member</span></div></article>
-   <article class="review reveal delay-1"><div class="stars">★★★★★</div><blockquote>“Started as something to do on the commute and it turned into steady side income. The app is light on data, which matters to me — a full evening of chatting barely touches my bundle.”</blockquote><div class="reviewer"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=85" alt="Brian profile photo" loading="lazy"></div><div><strong>Brian O. 🇺🇬</strong><small>Kampala, Uganda</small></div><span class="verified">✓ Member since 2024</span></div></article>
-   <article class="review reveal delay-2"><div class="stars">★★★★★</div><blockquote>“My real name and number are never shown, which was my main worry before signing up. Six months in and I have had no problems. Withdrawals to M-Pesa have always gone through.”</blockquote><div class="reviewer"><div class="review-avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=85" alt="Fatuma profile photo" loading="lazy"></div><div><strong>Fatuma A. 🇹🇿</strong><small>Dar es Salaam, Tanzania</small></div><span class="verified">✓ Verified member</span></div></article>
+  <div class="stories-head reveal">
+   <h2>Real Earners. Real <em>Payouts.</em></h2>
+   <p class="stories-sub">Stories from our community</p>
+   <p class="stories-note">Illustrative examples — not verified customer reviews. Names, amounts and timings below are sample content.</p>
   </div>
-  <p style="font-size:10px;color:#9aa19a;margin-top:16px">Testimonials above are demo/illustrative content for page design — they are not verified reviews. Publish only after verifying consent and authenticity.</p>
+  <div class="tcards" id="storyCards"></div>
+  <div class="stories-cta reveal"><a class="btn-stories" href="#signup">View More Stories <span aria-hidden="true">→</span></a></div>
  </div>
 </section>
 <section class="signup-section" id="signup">
@@ -159,7 +277,7 @@
 </section>
 <section class="section" id="faq">
  <div class="wrap faq-layout">
-  <div class="section-head reveal"><div class="eyebrow">Got questions?</div><h2>Frequently asked questions.</h2><p>Everything you need to know before you start chatting and earning on yurochat.</p><a href="#signup" class="btn btn-ghost" style="margin-top:24px">Ready to join? <span class="arrow">→</span></a></div>
+  <div class="section-head reveal"><div class="eyebrow">Got questions?</div><h2>Frequently asked questions.</h2><p>Everything you need to know before you start chatting and earning on YuroChat.</p><a href="#signup" class="btn btn-ghost" style="margin-top:24px">Ready to join? <span class="arrow">→</span></a></div>
   <div class="faq-list reveal delay-1">
    <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>How much can I earn on YuroChat?</span><span>＋</span></button><div class="faq-answer"><p>Earnings depend on the platform's current rates, your eligible activity, member demand and the time you choose to spend chatting. Check your account for current rates; no income amount is guaranteed.</p></div></div>
    <div class="faq-item"><button class="faq-q" aria-expanded="false"><span>Is there a joining fee?</span><span>＋</span></button><div class="faq-answer"><p>Creating an account is free. Never pay anyone who claims they can guarantee approval or earnings on your behalf.</p></div></div>
@@ -174,9 +292,24 @@
 </section>
 </main>
 <footer class="footer" id="footer">
- <div class="wrap"><div class="footer-top"><div class="footer-about"><a class="brand" href="#top"><span class="brand-mark">e</span>YuroChat</a><p>Chat, connect, get paid. Kenya's platform concept connecting people who want meaningful conversations. Make sure platform claims, payout details and policies are verified before launch.</p></div><div class="footer-links"><a href="#how">How it works</a><a href="#members">Members</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#signup">Sign up</a></div></div><div class="footer-bottom"><span>© 2026 yurochat. All rights reserved.</span><span>Built for good conversations. · <a href="#footer">Terms</a> · <a href="#footer">Privacy</a></span></div></div>
+ <div class="wrap"><div class="footer-top"><div class="footer-about"><a class="brand" href="#top"><span class="brand-mark">y</span>Yuro<span style="color:#f6c755">Chat</span></a><p>Chat, connect, get paid. Kenya's platform concept connecting people who want meaningful conversations. Make sure platform claims, payout details and policies are verified before launch.</p></div><div class="footer-links"><a href="#how">How it works</a><a href="#members">Members</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#signup">Sign up</a><a href="https://wa.me/254740465478?text=Hi%2C%20I%27m%20interested%20in%20business." target="_blank" rel="noopener">WhatsApp</a></div></div><div class="footer-bottom"><span>© 2026 YuroChat. All rights reserved.</span><span>Built for good conversations. · <a href="#footer">Terms</a> · <a href="#footer">Privacy</a></span></div></div>
 </footer>
-<a class="chat-us" href="mailto:support@yurochat.site?subject=YuroChat%20support"><span>💬</span> Chat us</a>
+<a class="chat-us" href="https://wa.me/254740465478?text=Hi%2C%20I%27m%20interested%20in%20business." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2z"/><path d="M16.5 13.9c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.9-3.5-3.4-.2-.3 0-.5.1-.6.2-.2.4-.5.5-.6.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 1.5 2.2 3.5 3.7 5.9 4.4.6.2 1.2.4 1.7.4.7.1 1.3 0 1.8-.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+  WhatsApp
+</a>
+<div class="demo-toasts" aria-live="polite">
+ <div class="demo-toast toast-left" id="toastLeft">
+  <span class="toast-ico ok" aria-hidden="true">✓</span>
+  <div class="toast-body"><p class="toast-title"></p><p class="toast-meta"><span class="toast-time">Just now</span><span class="toast-demo">demo</span></p></div>
+  <button class="toast-close" type="button" aria-label="Dismiss notification">×</button>
+ </div>
+ <div class="demo-toast toast-right" id="toastRight">
+  <span class="toast-ico people" aria-hidden="true">👥</span>
+  <div class="toast-body"><p class="toast-title"></p><p class="toast-meta"><span class="toast-time">Just now</span><span class="toast-demo">demo</span></p></div>
+  <button class="toast-close" type="button" aria-label="Dismiss notification">×</button>
+ </div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 <script>
 const members=[
@@ -273,6 +406,55 @@ document.querySelectorAll('[data-chat]').forEach(a=>a.addEventListener('click',(
 const SIGNUP_URL='https://Mulaearn.com/register.php?ref=Enachat';
 document.getElementById('signupForm').addEventListener('submit',e=>{e.preventDefault();window.location.href=SIGNUP_URL;});
 document.getElementById('signupDirect').setAttribute('href',SIGNUP_URL);
+
+/* payout stories — uses the testimonial entries and payout rows already on this page */
+const stories=[
+ {name:'Kelvin O.',flag:'🇰🇪',country:'Kenya',quote:'I chat for about two hours after my shift and it covers my rent contribution every month. The M-Pesa withdrawal is the part that sold me — I requested at 9pm and it was in my account before I slept.',amount:'KES 5,000',method:'M-Pesa',icon:'📱',time:'2 min ago'},
+ {name:'Amaka N.',flag:'🇳🇬',country:'Nigeria',quote:'I was sceptical because I had tried two other sites that just took my money at signup. Here I did not pay anything to join, and the first payout came through to my bank exactly when they said it would.',amount:'₦42,000',method:'Bank',icon:'🏦',time:'5 min ago'},
+ {name:'Kwame B.',flag:'🇬🇭',country:'Ghana',quote:'The conversations are genuinely normal — people talk about their families, the weather, their dogs. I had a login issue once and support replied at 2am. MoMo withdrawal took a few minutes.',amount:'GH₵ 620',method:'MoMo',icon:'📲',time:'8 min ago'},
+ {name:'Naledi D.',flag:'🇿🇦',country:'South Africa',quote:'What I like is that there are no shifts. I am a student, so I chat between lectures and stop when I need to study. Nobody pressures you and you can block anyone who is rude.',amount:'R 1,850',method:'Bank',icon:'🏦',time:'14 min ago'},
+ {name:'Brian O.',flag:'🇺🇬',country:'Uganda',quote:'Started as something to do on the commute and it turned into steady side income. The app is light on data, which matters to me — a full evening of chatting barely touches my bundle.',amount:'UGX 310,000',method:'MoMo',icon:'📲',time:'17 min ago'},
+ {name:'Fatuma A.',flag:'🇹🇿',country:'Tanzania',quote:'My real name and number are never shown, which was my main worry before signing up. Six months in and I have had no problems. Withdrawals to M-Pesa have always gone through.',amount:'TZS 190,000',method:'M-Pesa',icon:'📱',time:'21 min ago'}
+];
+const storyCards=document.getElementById('storyCards');
+if(storyCards){
+ storyCards.innerHTML=stories.map(s=>`<article class="tcard"><div class="tcard-avatar"><img src="${avatarFallback(s.name,112,56,'#efe7dc','#6a2b96')}" alt="Initials avatar for ${s.name}" width="112" height="112" loading="lazy"></div><div class="tcard-main"><h3 class="tcard-name">${s.name}</h3><div class="tcard-country"><span aria-hidden="true">${s.flag}</span> ${s.country}</div><p class="tcard-quote">“${s.quote}”</p><div class="stars" aria-label="Rated 5 out of 5">★★★★★</div></div><div class="tcard-side"><span class="payout-pill">+${s.amount}</span><span class="story-method"><i aria-hidden="true">${s.icon}</i> ${s.method}</span><span class="tcard-time">${s.time}</span></div></article>`).join('');
+}
+
+/* floating demo notifications — cycling the payout rows and member entries above */
+const tLeft=document.getElementById('toastLeft'),tRight=document.getElementById('toastRight');
+let toastIdx=0,toastPaused=false;
+const flagOf=p=>p[1].split(' ')[0],countryOf=p=>p[1].split(' ').slice(1).join(' ');
+function paintToast(el,title,time){el.querySelector('.toast-title').innerHTML=title;el.querySelector('.toast-time').textContent=time;}
+function cycleToasts(){
+ if(!tLeft||!tRight||toastPaused||document.hidden)return;
+ if(!tLeft.dataset.dismissed){
+  const p=payouts[toastIdx%payouts.length];
+  paintToast(tLeft,`<b>${flagOf(p)} ${p[0]}</b> from ${countryOf(p)} withdrew <b>${p[2]}</b> via ${p[3]}`,p[4]);
+  tLeft.classList.add('show');
+ }
+ if(!tRight.dataset.dismissed){
+  const m=members[toastIdx%members.length];
+  const where=(m.meta.split('·')[1]||'online').trim().replace(/^\S+\s/,'');
+  paintToast(tRight,`<b>${m.name}</b> from ${where} ${m.status==='typing'?'is typing…':'is open to chat'}`,'Just now');
+  tRight.classList.add('show');
+ }
+ toastIdx++;
+ setTimeout(()=>{tLeft.classList.remove('show');tRight.classList.remove('show')},5200);
+}
+setTimeout(cycleToasts,1400);
+setInterval(cycleToasts,8600);
+document.querySelectorAll('.toast-close').forEach(b=>b.addEventListener('click',e=>{
+ const el=e.currentTarget.closest('.demo-toast');
+ el.dataset.dismissed='1';el.classList.remove('show');
+}));
+const storiesCta=document.querySelector('.stories-cta');
+if(storiesCta&&'IntersectionObserver'in window){
+ new IntersectionObserver(entries=>{
+  toastPaused=entries[0].isIntersecting;
+  if(toastPaused){tLeft.classList.remove('show');tRight.classList.remove('show');}
+ },{threshold:.15}).observe(storiesCta);
+}
 </script>
 </body>
 </html>
