@@ -520,19 +520,25 @@ const flagFor=c=>COUNTRY_FLAGS[c]||c.replace(/[^A-Za-z]/g,'').slice(0,2).toUpper
 const storyCards=document.getElementById('storyCards');
 const storiesMore=document.getElementById('storiesMore');
 const storiesCount=document.getElementById('storiesCount');
+const escHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let STORY_ROWS=PAYOUTS.map(r=>({name:r[0],amount:r[1],country:r[2]}));
 let storiesShown=0;
-function storyMarkup(row){
- const [name,amount,country]=row;
+function storyMarkup(r){
+ const name=String(r.name||'');
  const [bg,fg]=AVATAR_COLORS[nameHash(name)%AVATAR_COLORS.length];
- return `<article class="tcard"><div class="tcard-avatar"><img src="${avatarFallback(name,112,56,bg,fg)}" alt="Initials avatar for ${name}" width="112" height="112" loading="lazy"></div><div class="tcard-main"><h3 class="tcard-name">${name}</h3><div class="tcard-country"><span aria-hidden="true">${flagFor(country)}</span> ${country}</div><p class="tcard-quote">Payout received · ${country}</p></div><div class="tcard-side"><span class="payout-pill">+${amount}</span></div></article>`;
+ const avatar=r.photo
+  ? `<img src="${escHtml(r.photo)}" alt="Photo of ${escHtml(name)}" width="112" height="112" loading="lazy">`
+  : `<img src="${avatarFallback(name,112,56,bg,fg)}" alt="Initials avatar for ${escHtml(name)}" width="112" height="112" loading="lazy">`;
+ const meta=[r.method,r.date].filter(Boolean).join(' · ');
+ return `<article class="tcard"><div class="tcard-avatar">${avatar}</div><div class="tcard-main"><h3 class="tcard-name">${escHtml(name)}</h3><div class="tcard-country"><span aria-hidden="true">${flagFor(String(r.country||''))}</span> ${escHtml(r.country||'')}</div>${r.quote?`<p class="tcard-quote">“${escHtml(r.quote)}”</p>`:`<p class="tcard-quote">Payout received · ${escHtml(r.country||'')}</p>`}${r.stars?'<div class="stars" aria-label="Rated 5 out of 5">★★★★★</div>':''}</div><div class="tcard-side"><span class="payout-pill">+${escHtml(r.amount||'')}</span>${meta?`<span class="story-method">${escHtml(meta)}</span>`:''}</div></article>`;
 }
 function updateStoriesUi(){
- if(storiesCount)storiesCount.textContent=`Showing ${storiesShown} of ${PAYOUTS.length}`;
- if(storiesMore)storiesMore.hidden=storiesShown>=PAYOUTS.length;
+ if(storiesCount)storiesCount.textContent=`Showing ${storiesShown} of ${STORY_ROWS.length}`;
+ if(storiesMore)storiesMore.hidden=storiesShown>=STORY_ROWS.length;
 }
 function showMoreStories(){
  if(!storyCards)return;
- const batch=PAYOUTS.slice(storiesShown,storiesShown+PAGE_SIZE);
+ const batch=STORY_ROWS.slice(storiesShown,storiesShown+PAGE_SIZE);
  if(!batch.length)return;
  storyCards.insertAdjacentHTML('beforeend',batch.map(storyMarkup).join(''));
  storiesShown+=batch.length;
@@ -540,6 +546,22 @@ function showMoreStories(){
 }
 showMoreStories();
 if(storiesMore)storiesMore.addEventListener('click',showMoreStories);
+/* Reviews added through /admin/reviews.php take precedence when the feed exists. */
+fetch('reviews.json?t='+Date.now(),{cache:'no-store'})
+ .then(res=>res.ok?res.json():null)
+ .then(rows=>{
+  if(!Array.isArray(rows)||!rows.length)return;
+  const list=rows.filter(x=>x&&x.name&&x.amount).map(x=>({
+   name:String(x.name),amount:String(x.amount),country:String(x.country||''),
+   method:x.method?String(x.method):'',date:x.date?String(x.date):'',
+   quote:x.quote?String(x.quote):'',photo:x.photo?String(x.photo):'',stars:true
+  }));
+  if(!list.length)return;
+  STORY_ROWS=list.reverse();
+  storiesShown=0;storyCards.innerHTML='';
+  showMoreStories();
+ })
+ .catch(()=>{});
 
 /* floating demo notifications — cycling the payout rows and member entries above */
 const tLeft=document.getElementById('toastLeft'),tRight=document.getElementById('toastRight');
