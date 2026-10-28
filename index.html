@@ -100,7 +100,9 @@
 .tcard-time{font-size:11px;color:#9aa3ac}
 .btn-stories{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(118deg,#4a1069,#75219c);color:#fff;border-radius:999px;padding:15px 28px;font-weight:800;font-size:14px;box-shadow:0 14px 32px #4a10693d;transition:transform .2s,box-shadow .2s}
 .btn-stories:hover{transform:translateY(-2px);box-shadow:0 18px 38px #4a106952}
+.btn-stories[hidden]{display:none}
 .stories-cta{text-align:center;margin-top:30px}
+.stories-count{font-size:12px;color:#8b93a0;margin:14px 0 0;min-height:18px;letter-spacing:.01em}
 /* ---------- floating demo toasts ---------- */
 .demo-toasts{position:fixed;inset:auto 0 0 0;pointer-events:none;z-index:70}
 .demo-toast{position:fixed;display:flex;align-items:flex-start;gap:11px;width:300px;background:#fff;border:1px solid #ece9e2;border-radius:16px;padding:12px 13px;box-shadow:0 18px 42px #1b231a26;pointer-events:auto;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}
@@ -250,10 +252,10 @@
   <div class="stories-head reveal">
    <h2>Real Earners. Real <em>Payouts.</em></h2>
    <p class="stories-sub">Stories from our community</p>
-   <p class="stories-note">. Names, amounts and timings below are sample content.</p>
+   <p class="stories-note">Payout records supplied by the YuroChat team.</p>
   </div>
   <div class="tcards" id="storyCards"></div>
-  <div class="stories-cta reveal"><a class="btn-stories" href="#signup">View More Stories <span aria-hidden="true">→</span></a></div>
+  <div class="stories-cta reveal"><button class="btn-stories" id="storiesMore" type="button">View More Stories <span aria-hidden="true">→</span></button><p class="stories-count" id="storiesCount"></p></div>
  </div>
 </section>
 <section class="signup-section" id="signup">
@@ -407,19 +409,42 @@ const SIGNUP_URL='https://Mulaearn.com/register.php?ref=Enachat';
 document.getElementById('signupForm').addEventListener('submit',e=>{e.preventDefault();window.location.href=SIGNUP_URL;});
 document.getElementById('signupDirect').setAttribute('href',SIGNUP_URL);
 
-/* payout stories — uses the testimonial entries and payout rows already on this page */
-const stories=[
- {name:'Kelvin O.',flag:'🇰🇪',country:'Kenya',quote:'I chat for about two hours after my shift and it covers my rent contribution every month. The M-Pesa withdrawal is the part that sold me — I requested at 9pm and it was in my account before I slept.',amount:'KES 5,000',method:'M-Pesa',icon:'📱',time:'2 min ago'},
- {name:'Amaka N.',flag:'🇳🇬',country:'Nigeria',quote:'I was sceptical because I had tried two other sites that just took my money at signup. Here I did not pay anything to join, and the first payout came through to my bank exactly when they said it would.',amount:'₦42,000',method:'Bank',icon:'🏦',time:'5 min ago'},
- {name:'Kwame B.',flag:'🇬🇭',country:'Ghana',quote:'The conversations are genuinely normal — people talk about their families, the weather, their dogs. I had a login issue once and support replied at 2am. MoMo withdrawal took a few minutes.',amount:'GH₵ 620',method:'MoMo',icon:'📲',time:'8 min ago'},
- {name:'Naledi D.',flag:'🇿🇦',country:'South Africa',quote:'What I like is that there are no shifts. I am a student, so I chat between lectures and stop when I need to study. Nobody pressures you and you can block anyone who is rude.',amount:'R 1,850',method:'Bank',icon:'🏦',time:'14 min ago'},
- {name:'Brian O.',flag:'🇺🇬',country:'Uganda',quote:'Started as something to do on the commute and it turned into steady side income. The app is light on data, which matters to me — a full evening of chatting barely touches my bundle.',amount:'UGX 310,000',method:'MoMo',icon:'📲',time:'17 min ago'},
- {name:'Fatuma A.',flag:'🇹🇿',country:'Tanzania',quote:'My real name and number are never shown, which was my main worry before signing up. Six months in and I have had no problems. Withdrawals to M-Pesa have always gone through.',amount:'TZS 190,000',method:'M-Pesa',icon:'📱',time:'21 min ago'}
+/* Payout records supplied by the owner: [name, amount + currency, country].
+   The list renders 10 at a time; append further rows here and the count,
+   paging and CTA update automatically. */
+const PAYOUTS=[
+ ['Brian Mwangi','KSh 2,500','Kenya'],
+ ['Ama Mensah','GH₵ 450','Ghana'],
+ ['Chinedu Okafor','₦ 25,000','Nigeria']
 ];
+const PAGE_SIZE=10;
+const COUNTRY_FLAGS={Kenya:'🇰🇪',Nigeria:'🇳🇬',Ghana:'🇬🇭','South Africa':'🇿🇦',Uganda:'🇺🇬',Tanzania:'🇹🇿',Rwanda:'🇷🇼',Ethiopia:'🇪🇹',Egypt:'🇪🇬',Morocco:'🇲🇦',Algeria:'🇩🇿',Tunisia:'🇹🇳',Cameroon:'🇨🇲',"Côte d'Ivoire":'🇨🇮',Senegal:'🇸🇳',Zimbabwe:'🇿🇼',Zambia:'🇿🇲',Mozambique:'🇲🇿',Botswana:'🇧🇼',Malawi:'🇲🇼',Angola:'🇦🇴','DR Congo':'🇨🇩',Burundi:'🇧🇮',Madagascar:'🇲🇬',Somalia:'🇸🇴',Sudan:'🇸🇩',Libya:'🇱🇾',Mali:'🇲🇱','Burkina Faso':'🇧🇫',Niger:'🇳🇪',Chad:'🇹🇩',Togo:'🇹🇬',Benin:'🇧🇯','Sierra Leone':'🇸🇱',Liberia:'🇱🇷',Gambia:'🇬🇲',Guinea:'🇬🇳',Mauritania:'🇲🇷',Gabon:'🇬🇦',Congo:'🇨🇬',Namibia:'🇳🇦',Lesotho:'🇱🇸',Eswatini:'🇸🇿',Mauritius:'🇲🇺'};
+const AVATAR_COLORS=[['#efe7dc','#6a2b96'],['#e3f1e6','#2c6a44'],['#fdeccd','#8a5b12'],['#e4ecfb','#2f4b8a'],['#f7e3e9','#8c2f4e'],['#e6f0f7','#2b5a72']];
+const nameHash=n=>{let h=0;for(let i=0;i<n.length;i++)h=(h*31+n.charCodeAt(i))>>>0;return h;};
+const flagFor=c=>COUNTRY_FLAGS[c]||c.replace(/[^A-Za-z]/g,'').slice(0,2).toUpperCase();
 const storyCards=document.getElementById('storyCards');
-if(storyCards){
- storyCards.innerHTML=stories.map(s=>`<article class="tcard"><div class="tcard-avatar"><img src="${avatarFallback(s.name,112,56,'#efe7dc','#6a2b96')}" alt="Initials avatar for ${s.name}" width="112" height="112" loading="lazy"></div><div class="tcard-main"><h3 class="tcard-name">${s.name}</h3><div class="tcard-country"><span aria-hidden="true">${s.flag}</span> ${s.country}</div><p class="tcard-quote">“${s.quote}”</p><div class="stars" aria-label="Rated 5 out of 5">★★★★★</div></div><div class="tcard-side"><span class="payout-pill">+${s.amount}</span><span class="story-method"><i aria-hidden="true">${s.icon}</i> ${s.method}</span><span class="tcard-time">${s.time}</span></div></article>`).join('');
+const storiesMore=document.getElementById('storiesMore');
+const storiesCount=document.getElementById('storiesCount');
+let storiesShown=0;
+function storyMarkup(row){
+ const [name,amount,country]=row;
+ const [bg,fg]=AVATAR_COLORS[nameHash(name)%AVATAR_COLORS.length];
+ return `<article class="tcard"><div class="tcard-avatar"><img src="${avatarFallback(name,112,56,bg,fg)}" alt="Initials avatar for ${name}" width="112" height="112" loading="lazy"></div><div class="tcard-main"><h3 class="tcard-name">${name}</h3><div class="tcard-country"><span aria-hidden="true">${flagFor(country)}</span> ${country}</div><p class="tcard-quote">Payout received · ${country}</p></div><div class="tcard-side"><span class="payout-pill">+${amount}</span></div></article>`;
 }
+function updateStoriesUi(){
+ if(storiesCount)storiesCount.textContent=`Showing ${storiesShown} of ${PAYOUTS.length}`;
+ if(storiesMore)storiesMore.hidden=storiesShown>=PAYOUTS.length;
+}
+function showMoreStories(){
+ if(!storyCards)return;
+ const batch=PAYOUTS.slice(storiesShown,storiesShown+PAGE_SIZE);
+ if(!batch.length)return;
+ storyCards.insertAdjacentHTML('beforeend',batch.map(storyMarkup).join(''));
+ storiesShown+=batch.length;
+ updateStoriesUi();
+}
+showMoreStories();
+if(storiesMore)storiesMore.addEventListener('click',showMoreStories);
 
 /* floating demo notifications — cycling the payout rows and member entries above */
 const tLeft=document.getElementById('toastLeft'),tRight=document.getElementById('toastRight');
